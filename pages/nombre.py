@@ -14,6 +14,10 @@ En la comunidad de personas sordas, la presentación de los nombres se realiza m
 # Imagen
 st.image("abecedario.jpg")
 
+st.write("""
+A continuación, encontrarás un video muy corto que enseña cómo saludar, decir "mi nombre es" y el ejemplo de cómo deletrear un nombre.
+    """)
+
 # Video
 st.video("deletreonombre.mp4")
 
