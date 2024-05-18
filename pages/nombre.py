@@ -62,8 +62,11 @@ for letra in nombre:
         # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=170)
 
+        # Generar un identificador único para el menú desplegable
+        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
+
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, key=letra)
+        opcion_seleccionada = st.selectbox("", abecedario, key=identificador_widget)
         opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
