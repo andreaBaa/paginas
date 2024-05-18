@@ -66,4 +66,3 @@ for letra in nombre:
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
-
