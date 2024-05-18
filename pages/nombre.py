@@ -73,7 +73,7 @@ for letra in letras_nombre_desordenadas:
         identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
+        opcion_seleccionada = st.selectbox("", abecedario, index=abecedario.index(letra), key=identificador_widget)
         opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
