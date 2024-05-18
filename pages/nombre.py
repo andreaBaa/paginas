@@ -53,6 +53,10 @@ for letra in abecedario:
     ruta_imagen = os.path.join(directorio, imagen)
     letras_imagenes[letra] = ruta_imagen
 
+# Mezclar las letras del nombre para mostrarlas en desorden
+letras_nombre_desordenadas = list(letras_nombre)
+random.shuffle(letras_nombre_desordenadas)
+
 # Mostrar las imágenes y menús desplegables en un formato de cuadrícula
 columnas = 3
 contador = 0
@@ -60,7 +64,7 @@ contador = 0
 # Lista para almacenar las opciones seleccionadas por el usuario
 opciones_seleccionadas = {}
 
-for letra in nombre:
+for letra in letras_nombre_desordenadas:
     if letra in letras_imagenes:
         # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=170)
@@ -69,7 +73,7 @@ for letra in nombre:
         identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, index=abecedario.index(letra), key=identificador_widget)
+        opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
         opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
