@@ -50,10 +50,17 @@ for letra in abecedario:
 # Mostrar las imágenes de las letras del nombre ingresado en un orden aleatorio
 letras_nombre = list(nombre)
 random.shuffle(letras_nombre)
+
+# Ajustar el tamaño de las imágenes
+tamanio_imagen = 100  # Puedes ajustar este valor según tus necesidades
+
+# Mostrar las imágenes en un formato de cuadrícula
+columnas = 3
+contador = 0
+
 for letra in letras_nombre:
     if letra in letras_imagenes:
-        st.image(letras_imagenes[letra])
-
-
-
-
+        st.image(letras_imagenes[letra], width=tamanio_imagen)
+        contador += 1
+        if contador % columnas == 0:
+            st.write("")  # Agregar un salto de línea después de cada fila de imágenes
