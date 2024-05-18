@@ -30,7 +30,18 @@ Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a l
 """)
 
 # Input para escribir el nombre
-nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)").upper()
+nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)", key="nombre").upper()
+
+# Bandera para verificar si se ha ingresado el nombre
+nombre_ingresado = False
+
+# Función para manejar el evento on_change del campo de texto
+def on_nombre_change(nombre):
+    nonlocal nombre_ingresado
+    nombre_ingresado = True
+
+# Registrar la función on_change
+st.text_input("", key="dummy").on_change(on_nombre_change)
 
 # Obtener las letras únicas del nombre ingresado
 letras_nombre = set(nombre)
@@ -66,15 +77,15 @@ for letra in nombre:
         identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, key=identificador_widget)
+        opcion_seleccionada = st.selectbox("", abecedario, index=abecedario.index(letra), key=identificador_widget)
         opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
 
-# Verificar si se han seleccionado todas las opciones
-if st.button("Verificar"):
+# Verificar si se ha ingresado el nombre y mostrar el botón "Verificar"
+if nombre_ingresado and st.button("Verificar"):
     for letra in nombre:
         if letra in opciones_seleccionadas:
             opcion_seleccionada = opciones_seleccionadas[letra]
