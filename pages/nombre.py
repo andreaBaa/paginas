@@ -57,6 +57,12 @@ contador = 0
 # Lista para almacenar los identificadores únicos de los menús desplegables
 identificadores = []
 
+# Lista para almacenar si la letra fue seleccionada correctamente
+letras_correctas = []
+
+# Lista para almacenar si la letra fue seleccionada incorrectamente
+letras_incorrectas = []
+
 for letra in nombre:
     if letra in letras_imagenes:
         # Mostrar la imagen de la letra
@@ -69,18 +75,23 @@ for letra in nombre:
         # Mostrar el menú desplegable para seleccionar la letra
         opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
 
+        # Verificar si la opción seleccionada es correcta
+        if opcion_seleccionada == letra:
+            st.image("chulo_verde.png", width=25)
+            st.write("¡Muy bien!")
+            letras_correctas.append(letra)
+        else:
+            st.image("cruz_roja.png", width=25)
+            st.write(f"Incorrecto. La seña correcta es:")
+            st.image(letras_imagenes[letra], width=170)
+            letras_incorrectas.append(letra)
+
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
 
-# Botón para verificar las respuestas
-if st.button("Verificar"):
-    for letra, identificador_widget in zip(nombre, identificadores):
-        opcion_seleccionada = st.session_state[identificador_widget]
-        if opcion_seleccionada == letra:
-            st.success("¡Muy bien!")
-            st.image("chulo_verde.png", width=30)
-        else:
-            st.error(f"Incorrecto. La seña correcta es:")
-            st.image(letras_imagenes[letra], width=170)
-            st.image("cruz_roja.png", width=30)
+# Verificar si todas las letras fueron seleccionadas correctamente
+if len(letras_correctas) == len(nombre):
+    st.write("¡Felicidades! Has seleccionado todas las letras correctamente.")
+else:
+    st.write("Sigue practicando. Algunas letras no fueron seleccionadas correctamente.")
