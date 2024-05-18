@@ -57,6 +57,9 @@ contador = 0
 # Lista para almacenar los identificadores únicos de los menús desplegables
 identificadores = []
 
+# Lista para almacenar las opciones seleccionadas por el usuario
+opciones_seleccionadas = {}
+
 for letra in nombre:
     if letra in letras_imagenes:
         # Mostrar la imagen de la letra
@@ -67,8 +70,20 @@ for letra in nombre:
         identificadores.append(identificador_widget)
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
+        opciones_seleccionadas[letra] = st.selectbox("", abecedario, index=abecedario.index(letra), key=identificador_widget)
 
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+
+# Verificar si se han seleccionado todas las opciones
+if st.button("Verificar"):
+    for letra in nombre:
+        if letra in opciones_seleccionadas:
+            opcion_seleccionada = opciones_seleccionadas[letra]
+            if opcion_seleccionada == letra:
+                st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
+            else:
+                st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
+                st.image(letras_imagenes[letra], width=170)
+
