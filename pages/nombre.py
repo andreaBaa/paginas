@@ -32,8 +32,11 @@ Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a l
 # Input para escribir el nombre
 nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)").upper()
 
-# Arreglo con las letras del abecedario
-abecedario = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+# Obtener las letras únicas del nombre ingresado
+letras_nombre = set(nombre)
+
+# Arreglo con las letras del abecedario que están contenidas en el nombre ingresado
+abecedario = sorted(list(letras_nombre))
 
 # Diccionario para mapear cada letra con su imagen correspondiente
 letras_imagenes = {}
@@ -47,21 +50,14 @@ for letra in abecedario:
     ruta_imagen = os.path.join(directorio, imagen)
     letras_imagenes[letra] = ruta_imagen
 
-# Mostrar las imágenes de las letras del nombre ingresado en un orden aleatorio
-letras_nombre = list(nombre)
-random.shuffle(letras_nombre)
-
-# Ajustar el tamaño de las imágenes
-tamanio_imagen = 170  # Puedes ajustar este valor según tus necesidades
-
 # Mostrar las imágenes y menús desplegables en un formato de cuadrícula
 columnas = 3
 contador = 0
 
-for letra in letras_nombre:
+for letra in nombre:
     if letra in letras_imagenes:
         # Mostrar la imagen de la letra
-        st.image(letras_imagenes[letra], width=tamanio_imagen)
+        st.image(letras_imagenes[letra], width=170)
 
         # Mostrar el menú desplegable para seleccionar la letra
         opcion_seleccionada = st.selectbox("Selecciona la letra", abecedario, index=abecedario.index(letra))
@@ -69,4 +65,3 @@ for letra in letras_nombre:
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
-
