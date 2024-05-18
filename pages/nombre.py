@@ -50,12 +50,21 @@ for letra in abecedario:
 # Mostrar las imágenes de las letras del nombre ingresado en un orden aleatorio
 letras_nombre = list(nombre)
 random.shuffle(letras_nombre)
-
-# Ajustar el ancho de las imágenes para que quepan tres en una fila
-width = 100  # Ancho de las imágenes
+imagenes_nombre = []
 for letra in letras_nombre:
     if letra in letras_imagenes:
-        st.image(letras_imagenes[letra], width=width)
+        imagenes_nombre.append(letras_imagenes[letra])
+
+# Mostrar las imágenes en grupos de tres alineadas horizontalmente
+num_imagenes = len(imagenes_nombre)
+num_filas = num_imagenes // 3 + (1 if num_imagenes % 3 != 0 else 0)
+for i in range(num_filas):
+    col1, col2, col3 = st.columns(3)
+    for j in range(3):
+        index = i * 3 + j
+        if index < num_imagenes:
+            with col1, col2, col3:
+                st.image(imagenes_nombre[index], width=100, caption=f"Letra {letras_nombre[index]}")
 
 
 
