@@ -50,9 +50,12 @@ for letra in abecedario:
 # Mostrar las imágenes de las letras del nombre ingresado en un orden aleatorio
 letras_nombre = list(nombre)
 random.shuffle(letras_nombre)
+
+# Ajustar el ancho de las imágenes para que quepan tres en una fila
+width = 100  # Ancho de las imágenes
 for letra in letras_nombre:
     if letra in letras_imagenes:
-        st.image(letras_imagenes[letra])
+        st.image(letras_imagenes[letra], width=width)
 
 
 
