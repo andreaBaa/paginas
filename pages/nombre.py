@@ -60,8 +60,10 @@ for letra in nombre:
         st.image(letras_imagenes[letra], width=170)
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("Selecciona la letra", abecedario, index=abecedario.index(letra))
+        identificador_widget = f"selectbox_{letra}"  # Identificador único para cada widget
+        opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
 
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+
