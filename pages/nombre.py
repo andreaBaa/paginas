@@ -54,13 +54,19 @@ for letra in abecedario:
 columnas = 3
 contador = 0
 
+# Lista para almacenar los identificadores únicos de los menús desplegables
+identificadores = []
+
 for letra in nombre:
     if letra in letras_imagenes:
         # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=170)
 
+        # Generar un identificador único para el menú desplegable
+        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
+        identificadores.append(identificador_widget)
+
         # Mostrar el menú desplegable para seleccionar la letra
-        identificador_widget = f"selectbox_{letra}"  # Identificador único para cada widget
         opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
 
         contador += 1
