@@ -94,4 +94,3 @@ if nombre_ingresado and st.button("Verificar"):
             else:
                 st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
                 st.image(letras_imagenes[letra], width=170)
-
