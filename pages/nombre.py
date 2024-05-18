@@ -37,7 +37,7 @@ nombre_ingresado = False
 
 # Función para manejar el evento on_change del campo de texto
 def on_nombre_change(nombre):
-    nonlocal nombre_ingresado
+    global nombre_ingresado
     nombre_ingresado = True
 
 # Registrar la función on_change
