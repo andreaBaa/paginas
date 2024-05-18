@@ -54,9 +54,6 @@ for letra in abecedario:
 columnas = 3
 contador = 0
 
-# Lista para almacenar los identificadores únicos de los menús desplegables
-identificadores = []
-
 # Lista para almacenar las opciones seleccionadas por el usuario
 opciones_seleccionadas = {}
 
@@ -65,12 +62,9 @@ for letra in nombre:
         # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=170)
 
-        # Generar un identificador único para el menú desplegable
-        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
-        identificadores.append(identificador_widget)
-
         # Mostrar el menú desplegable para seleccionar la letra
-        opciones_seleccionadas[letra] = st.selectbox("", abecedario, index=abecedario.index(letra), key=identificador_widget)
+        opcion_seleccionada = st.selectbox("", abecedario, key=letra)
+        opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
         if contador % columnas == 0:
