@@ -35,14 +35,6 @@ nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)", key="nombre
 # Bandera para verificar si se ha ingresado el nombre
 nombre_ingresado = False
 
-# Función para manejar el evento on_change del campo de texto
-def on_nombre_change(nombre):
-    global nombre_ingresado
-    nombre_ingresado = True
-
-# Registrar la función on_change
-st.text_input("", key="dummy").on_change(on_nombre_change)
-
 # Obtener las letras únicas del nombre ingresado
 letras_nombre = set(nombre)
 
@@ -85,6 +77,9 @@ for letra in nombre:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
 
 # Verificar si se ha ingresado el nombre y mostrar el botón "Verificar"
+if nombre:
+    nombre_ingresado = True
+
 if nombre_ingresado and st.button("Verificar"):
     for letra in nombre:
         if letra in opciones_seleccionadas:
