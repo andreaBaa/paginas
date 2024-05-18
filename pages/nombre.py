@@ -52,15 +52,20 @@ letras_nombre = list(nombre)
 random.shuffle(letras_nombre)
 
 # Ajustar el tamaño de las imágenes
-tamaño_imagen = 150
+tamanio_imagen = 100  # Puedes ajustar este valor según tus necesidades
 
-# Mostrar las imágenes en un formato de cuadrícula
-columnas = 3
-contador = 0
+# Número de columnas por fila
+columnas_por_fila = 3
 
-for letra in letras_nombre:
-    if letra in letras_imagenes:
-        st.image(letras_imagenes[letra], width=tamaño_imagen)
-        contador += 1
-        if contador % columnas == 0:
-            st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+# Calcular el ancho de cada columna
+ancho_columna = 1.0 / columnas_por_fila
+
+# Mostrar las imágenes en un formato de cuadrícula con múltiples columnas
+with st.beta_container():
+    for i, letra in enumerate(letras_nombre):
+        if letra in letras_imagenes:
+            # Insertar una nueva columna para cada imagen
+            col = st.beta_columns(columnas_por_fila)
+            # Mostrar la imagen en la columna actual
+            with col[i % columnas_por_fila]:
+                st.image(letras_imagenes[letra], width=tamanio_imagen)
