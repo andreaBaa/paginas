@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import random
 
 # Título y Subtítulo
 st.title("¡Aprende lenguaje de señas colombiano!")
@@ -46,9 +47,12 @@ for letra in abecedario:
     ruta_imagen = os.path.join(directorio, imagen)
     letras_imagenes[letra] = ruta_imagen
 
-# Mostrar las imágenes de las letras del nombre ingresado
-for letra in nombre:
+# Mostrar las imágenes de las letras del nombre ingresado en un orden aleatorio
+letras_nombre = list(nombre)
+random.shuffle(letras_nombre)
+for letra in letras_nombre:
     if letra in letras_imagenes:
         st.image(letras_imagenes[letra])
+
 
 
