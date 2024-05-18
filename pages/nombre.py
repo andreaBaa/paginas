@@ -54,13 +54,19 @@ random.shuffle(letras_nombre)
 # Ajustar el tamaño de las imágenes
 tamanio_imagen = 170  # Puedes ajustar este valor según tus necesidades
 
-# Mostrar las imágenes en un formato de cuadrícula
+# Mostrar las imágenes y menús desplegables en un formato de cuadrícula
 columnas = 3
 contador = 0
 
 for letra in letras_nombre:
     if letra in letras_imagenes:
+        # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=tamanio_imagen)
+
+        # Mostrar el menú desplegable para seleccionar la letra
+        opcion_seleccionada = st.selectbox("Selecciona la letra", abecedario, index=abecedario.index(letra))
+
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+
