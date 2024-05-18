@@ -72,3 +72,15 @@ for letra in nombre:
         contador += 1
         if contador % columnas == 0:
             st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+
+# Botón para verificar las respuestas
+if st.button("Verificar"):
+    for letra, identificador_widget in zip(nombre, identificadores):
+        opcion_seleccionada = st.session_state[identificador_widget]
+        if opcion_seleccionada == letra:
+            st.success("¡Muy bien!")
+            st.image("chulo_verde.png", width=30)
+        else:
+            st.error(f"Incorrecto. La seña correcta es:")
+            st.image(letras_imagenes[letra], width=170)
+            st.image("cruz_roja.png", width=30)
