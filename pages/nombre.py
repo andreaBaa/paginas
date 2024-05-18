@@ -57,44 +57,18 @@ contador = 0
 # Lista para almacenar los identificadores únicos de los menús desplegables
 identificadores = []
 
-# Lista para almacenar si la letra fue seleccionada correctamente
-letras_correctas = []
+for letra in nombre:
+    if letra in letras_imagenes:
+        # Mostrar la imagen de la letra
+        st.image(letras_imagenes[letra], width=170)
 
-# Lista para almacenar si la letra fue seleccionada incorrectamente
-letras_incorrectas = []
+        # Generar un identificador único para el menú desplegable
+        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
+        identificadores.append(identificador_widget)
 
-if nombre:
-    for letra in random.sample(nombre, len(nombre)):
-        if letra in letras_imagenes:
-            # Mostrar la imagen de la letra
-            st.image(letras_imagenes[letra], width=170)
+        # Mostrar el menú desplegable para seleccionar la letra
+        opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
 
-            # Generar un identificador único para el menú desplegable
-            identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
-            identificadores.append(identificador_widget)
-
-            # Mostrar el menú desplegable para seleccionar la letra
-            opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", abecedario, index=abecedario.index(letra), key=identificador_widget)
-
-            # Verificar si la opción seleccionada es correcta
-            if opcion_seleccionada == letra:
-                st.image("chulo_verde.png", width=25)
-                st.write("¡Muy bien!")
-                letras_correctas.append(letra)
-            else:
-                st.image("cruz_roja.png", width=25)
-                st.write(f"Incorrecto. La seña correcta es:")
-                st.image(letras_imagenes[letra], width=170)
-                letras_incorrectas.append(letra)
-
-            contador += 1
-            if contador % columnas == 0:
-                st.write("")  # Agregar un salto de línea después de cada fila de imágenes
-else:
-    st.write("Ingrese su nombre para comenzar")
-
-# Verificar si todas las letras fueron seleccionadas correctamente
-if letras_correctas and len(letras_correctas) == len(nombre):
-    st.write("¡Felicidades! Has seleccionado todas las letras correctamente.")
-elif letras_incorrectas:
-    st.write("Sigue practicando. Algunas letras no fueron seleccionadas correctamente.")
+        contador += 1
+        if contador % columnas == 0:
+            st.write("")  # Agregar un salto de línea después de cada fila de imágenes
