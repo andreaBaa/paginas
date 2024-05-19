@@ -95,7 +95,8 @@ if nombre:
                     st.image(letras_imagenes[letra], width=170)
 
         # Subtítulo y presentación del deletreo del nombre
-        st.subheader("Por lo tanto, el deletreo de tu nombre debe verse así en lengua de señas")
+        st.subheader("Por tanto, el deletreo de tu nombre debe verse así en lengua de señas:")
+        st.write("Practícalas e intenta presentarte.")
         
         for letra in nombre:
             if letra in letras_imagenes:
