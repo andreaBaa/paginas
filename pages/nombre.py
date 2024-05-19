@@ -66,11 +66,8 @@ opciones_seleccionadas = {}
 
 for letra in letras_nombre_desordenadas:
     if letra in letras_imagenes:
-        # Mostrar el texto de la letra seleccionada
-        st.write(f"Has elegido la letra {letra}")
-
         # Mostrar la imagen de la letra
-        st.image(letras_imagenes[letra], width=170)
+        imagen = st.image(letras_imagenes[letra], width=170)
 
         # Generar un identificador único para el menú desplegable
         identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
@@ -93,6 +90,8 @@ if nombre_ingresado and st.button("Verificar"):
             opcion_seleccionada = opciones_seleccionadas[letra]
             if opcion_seleccionada == letra:
                 st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
+                # Ocultar la imagen y el menú desplegable
+                imagen.empty()
             else:
                 st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
                 st.image(letras_imagenes[letra], width=170)
