@@ -18,7 +18,7 @@ st.image("ejemplodeletreo.png")
 
 st.write("""
 A continuación, encontrarás un video muy corto que enseña cómo saludar, decir "mi nombre es" y el ejemplo de cómo deletrear un nombre.
-    """)
+""")
 
 # Video
 st.video("deletreonombre.mp4")
@@ -31,9 +31,6 @@ Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a l
 
 # Input para escribir el nombre
 nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)", key="nombre").upper()
-
-# Bandera para verificar si se ha ingresado el nombre
-nombre_ingresado = False
 
 # Obtener las letras únicas del nombre ingresado
 letras_nombre = set(nombre)
@@ -87,15 +84,22 @@ for letra in letras_nombre_desordenadas:
 
 # Verificar si se ha ingresado el nombre y mostrar el botón "Verificar"
 if nombre:
-    nombre_ingresado = True
+    if st.button("Verificar"):
+        for letra in nombre:
+            if letra in opciones_seleccionadas:
+                opcion_seleccionada = opciones_seleccionadas[letra]
+                if opcion_seleccionada == letra:
+                    st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
+                else:
+                    st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
+                    st.image(letras_imagenes[letra], width=170)
 
-if nombre_ingresado and st.button("Verificar"):
-    for letra in nombre:
-        if letra in opciones_seleccionadas:
-            opcion_seleccionada = opciones_seleccionadas[letra]
-            if opcion_seleccionada == letra:
-                st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
-            else:
-                st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
-                st.image(letras_imagenes[letra], width=170)
+        # Subtítulo y presentación del deletreo del nombre
+        st.subheader("Por lo tanto, el deletreo de tu nombre debe verse así en lengua de señas")
+        
+        for letra in nombre:
+            if letra in letras_imagenes:
+                st.write(f"{letra}")
+                st.image(letras_imagenes[letra], width=100)
+
 
