@@ -70,14 +70,12 @@ for letra in letras_nombre_desordenadas:
         st.image(letras_imagenes[letra], width=170)
 
         # Generar un identificador único para el menú desplegable
-        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
-
-        # Obtener la opción seleccionada previamente por el usuario
-        opcion_seleccionada_previa = opciones_seleccionadas.get(letra, abecedario[0])
+        identificador_widget = f"selectbox_{letra}"
 
         # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, index=abecedario.index(opcion_seleccionada_previa), key=identificador_widget)
-        opciones_seleccionadas[letra] = opcion_seleccionada
+        with st.beta_container():
+            opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
+            opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
         if contador % columnas == 0:
@@ -96,3 +94,4 @@ if nombre_ingresado and st.button("Verificar"):
             else:
                 st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
                 st.image(letras_imagenes[letra], width=170)
+
