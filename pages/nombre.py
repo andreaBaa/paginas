@@ -26,7 +26,7 @@ st.video("deletreonombre.mp4")
 # Subtítulo y Texto
 st.subheader("¡Ponlo en práctica!")
 st.write("""
-Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a las letras de tu nombre. Con tus conocimientos previos del abecedario, identifica cada letra y ordénalas para conformar tu nombre en orden.
+Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a las señas de cada una de las letras de tu nombre. Con tus conocimientos previos del abecedario, identifica cada seña y elige la letra de tu nombre que le corresponde: 
 """)
 
 # Input para escribir el nombre
