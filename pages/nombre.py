@@ -32,9 +32,6 @@ Escribe tu nombre y luego verás unas imágenes en desorden que corresponden a l
 # Input para escribir el nombre
 nombre = st.text_input("Escribe solo tu primer nombre (sin tildes)", key="nombre").upper()
 
-# Bandera para verificar si se ha ingresado el nombre
-nombre_ingresado = False
-
 # Obtener las letras únicas del nombre ingresado
 letras_nombre = set(nombre)
 
@@ -64,32 +61,25 @@ contador = 0
 # Lista para almacenar las opciones seleccionadas por el usuario
 opciones_seleccionadas = {}
 
-for letra in letras_nombre_desordenadas:
-    if letra in letras_imagenes:
-        # Mostrar la imagen de la letra
-        imagen = st.image(letras_imagenes[letra], width=170)
+@st.cache
+def render_widgets():
+    for letra in letras_nombre_desordenadas:
+        if letra in letras_imagenes:
+            # Mostrar la imagen de la letra
+            st.image(letras_imagenes[letra], width=170)
 
-        # Generar un identificador único para el menú desplegable
-        identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
+            # Generar un identificador único para el menú desplegable
+            identificador_widget = f"selectbox_{letra}_{random.randint(1, 1000000)}"
 
-        # Mostrar el menú desplegable para seleccionar la letra
-        opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
-        opciones_seleccionadas[letra] = opcion_seleccionada
+            # Mostrar el menú desplegable para seleccionar la letra
+            opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
+            opciones_seleccionadas[letra] = opcion_seleccionada
 
-        contador += 1
-        if contador % columnas == 0:
-            st.write("")  # Agregar un salto de línea después de cada fila de imágenes
+            contador += 1
+            if contador % columnas == 0:
+                st.write("")  # Agregar un salto de línea después de cada fila de imágenes
 
 # Verificar si se ha ingresado el nombre y mostrar el botón "Verificar"
-if nombre:
-    nombre_ingresado = True
-
+nombre_ingresado = nombre != ""
 if nombre_ingresado and st.button("Verificar"):
-    for letra in nombre:
-        if letra in opciones_seleccionadas:
-            opcion_seleccionada = opciones_seleccionadas[letra]
-            if opcion_seleccionada == letra:
-                st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
-                # Ocultar la imagen y el menú desplegable
-                imagen.empty()
-
+    render_widgets()
