@@ -66,6 +66,9 @@ opciones_seleccionadas = {}
 
 for letra in letras_nombre_desordenadas:
     if letra in letras_imagenes:
+        # Mostrar el texto de la letra seleccionada
+        st.write(f"Has elegido la letra {letra}")
+
         # Mostrar la imagen de la letra
         st.image(letras_imagenes[letra], width=170)
 
@@ -84,8 +87,12 @@ for letra in letras_nombre_desordenadas:
 if nombre:
     nombre_ingresado = True
 
-if nombre_ingresado:
-    st.write("")  # Agregar un espacio para separar
-    st.write("Haz seleccionado las siguientes letras:")
-    for letra, opcion_seleccionada in opciones_seleccionadas.items():
-        st.write(f"Has elegido la letra {letra}: {opcion_seleccionada}")
+if nombre_ingresado and st.button("Verificar"):
+    for letra in nombre:
+        if letra in opciones_seleccionadas:
+            opcion_seleccionada = opciones_seleccionadas[letra]
+            if opcion_seleccionada == letra:
+                st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
+            else:
+                st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
+                st.image(letras_imagenes[letra], width=170)
