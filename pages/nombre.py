@@ -92,6 +92,4 @@ if nombre_ingresado and st.button("Verificar"):
                 st.success(f"¡Muy bien! Has seleccionado la letra {letra} correctamente.")
                 # Ocultar la imagen y el menú desplegable
                 imagen.empty()
-            else:
-                st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
-                st.image(letras_imagenes[letra], width=170)
+
