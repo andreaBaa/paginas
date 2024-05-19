@@ -73,7 +73,7 @@ for letra in letras_nombre_desordenadas:
         identificador_widget = f"selectbox_{letra}"
 
         # Mostrar el menú desplegable para seleccionar la letra
-        with st.beta_container():
+        with st.beta_expander(f"Selecciona la letra {letra}"):
             opcion_seleccionada = st.selectbox("", abecedario, index=0, key=identificador_widget)
             opciones_seleccionadas[letra] = opcion_seleccionada
 
@@ -94,4 +94,3 @@ if nombre_ingresado and st.button("Verificar"):
             else:
                 st.error(f"Incorrecto. La seña correcta para la letra {letra} es:")
                 st.image(letras_imagenes[letra], width=170)
-
