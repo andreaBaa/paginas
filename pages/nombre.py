@@ -78,7 +78,7 @@ for letra in letras_nombre_desordenadas:
 
         # Mostrar el menú desplegable para seleccionar la letra
         with col2:
-            opcion_seleccionada = st.selectbox(f"Selecciona la letra {letra}", [""] + abecedario, index=0, key=identificador_widget)
+            opcion_seleccionada = st.selectbox(f"Selecciona la letra de tu nombre que corresponde a la seña", [""] + abecedario, index=0, key=identificador_widget)
             opciones_seleccionadas[letra] = opcion_seleccionada
 
         contador += 1
